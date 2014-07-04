@@ -30,13 +30,16 @@ process.source = cms.Source(
     fileNames = cms.untracked.vstring(options.inputFiles)
     )
 
-process.load("L1Trigger.UCT2015.emulation_cfi")
 process.load("Configuration.Geometry.GeometryIdeal_cff")
+process.load("L1Trigger.L1TCalorimeter.L1TCaloStage1_PPFromRaw_cff")
 
-process.patterns = cms.EDAnalyzer('OrscLinkPatterns')
+process.patterns = cms.EDAnalyzer('OrscLinkPatterns',
+                                  src = cms.InputTag("simRctDigis")
 
 process.pattern_sequence = cms.Sequence(
-    process.emulationSequence *
+    process.L1TRerunHCALTP_FromRAW
+    +process.ecalDigis
+    +process.simRctDigis
     process.patterns)
 
 process.p = cms.Path(process.pattern_sequence)

@@ -21,6 +21,7 @@
 // user include files
 #include "FWCore/Framework/interface/Frameworkfwd.h"
 #include "FWCore/Framework/interface/EDAnalyzer.h"
+#include "FWCore/Utilities/interface/EDGetToken.h"
 
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/MakerMacros.h"
@@ -53,10 +54,14 @@ class OrscLinkPatterns : public edm::EDAnalyzer {
 
     void addRegion(CrateLinks& crateLink, const L1CaloRegion &reg);
     void addEM(CrateLinks& crateLink, const L1CaloEmCand &cand);
+
+    edm::EDGetToken regionToken;
+    edm::EDGetToken candsToken;
 };
 
-
 OrscLinkPatterns::OrscLinkPatterns(const edm::ParameterSet& iConfig) {
+  regionToken = consumes<L1CaloRegionCollection>(iConfig.getParameter<edm::InputTag>("src"));
+  candsToken = consumes<L1CaloEmCollection>(iConfig.getParameter<edm::InputTag>("src"));
 }
 
 
@@ -72,8 +77,8 @@ OrscLinkPatterns::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
   using namespace edm;
 
   // Grab Region and EM collections
-  iEvent.getByLabel("uctDigis", newRegions);
-  iEvent.getByLabel("uctDigis", newEMCands);
+  iEvent.getByToken(regionToken, newRegions);
+  iEvent.getByToken(candsToken, newEMCands);
 
   CaloLinks calolinks(iEvent.id().event(), iEvent.id().luminosityBlock(), iEvent.id().run());
 
