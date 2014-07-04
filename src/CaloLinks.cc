@@ -42,7 +42,7 @@ CaloLinks::write_to_file(std::ofstream& outfile) {
     throw std::runtime_error("File is not open");
   }
 
-  outfile << "run: " << run << " lumi: " << lumi << " event: " << event << std::endl;
+  // outfile << "run: " << run << " lumi: " << lumi << " event: " << event << std::endl;
 
   std::vector<uint32_t> link1[18];
   std::vector<uint32_t> link2[18];
@@ -53,26 +53,26 @@ CaloLinks::write_to_file(std::ofstream& outfile) {
     link2[i] = RCTlinks[i].link_values(2);
   }
 
-  // Crate number labels
+  // // Crate number labels
   outfile << std::setw(2) << std::uppercase << std::setfill('0');
-  for (int i = 0; i < 18; ++i) {
-    outfile << "Crate " << std::setw(2) << i;
-    if (i < 17) {
-      outfile << "          ";
-    }
-  }
+  // for (int i = 0; i < 18; ++i) {
+  //   outfile << "Crate " << std::setw(2) << i;
+  //   if (i < 17) {
+  //     outfile << "          ";
+  //   }
+  // }
 
-  // Link number labels
-  outfile << std::endl;
-  for (int i = 0; i < 18; ++i) {
-    outfile << "Link1    Link2";
-    if (i < 17) {
-      outfile << "    ";
-    }
-  }
+  // // Link number labels
+  // outfile << std::endl;
+  // for (int i = 0; i < 18; ++i) {
+  //   outfile << "Link1    Link2";
+  //   if (i < 17) {
+  //     outfile << "    ";
+  //   }
+  // }
 
   // print link data as 6 32-bit words per link
-  outfile << std::endl;
+  //outfile << std::endl;
   for (int i = 0 ; i < 6; ++i) {
     for (int j = 0; j < 18; ++j) {
       outfile << std::setw(8) << std::hex << int(link1[j].at(i)) << " ";
