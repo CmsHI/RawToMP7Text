@@ -1,0 +1,15 @@
+<flags ADD_SUBDIR="1" />
+<use name="FWCore/Framework"/>
+<use name="L1Trigger/CaloLinks"/>
+<use name="FWCore/ParameterSet"/>
+<use name="PhysicsTools/UtilAlgos"/>
+<use name="FWCore/ServiceRegistry"/>
+<use name="DataFormats/Candidate"/>
+<use name="root"/>
+<use name="rootrflx"/>
+<use name="FWCore/Utilities"/>
+<use name="rootmath"/>
+
+<export>
+        <lib   name="1"/>
+</export>
