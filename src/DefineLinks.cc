@@ -39,7 +39,7 @@ void DefineLinks::ReadFileoRSC(std::string fileinput) {
 void DefineLinks::WriteFileMP7Format(std::string fileoutput){
 
   std::ofstream outfile;
-  outfile.open(fileoutput, std::ofstream::out);
+  outfile.open(fileoutput.c_str(), std::ofstream::out);
 
 
   outfile << "Board MP7_TEST"<< std::endl;
