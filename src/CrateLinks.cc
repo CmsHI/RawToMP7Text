@@ -7,7 +7,7 @@
  * Author: D. Austin Belknap, UW-Madison
  */
 
-#include "../include/CrateLinks.h"
+#include "../interface/CrateLinks.h"
 
 
 /**

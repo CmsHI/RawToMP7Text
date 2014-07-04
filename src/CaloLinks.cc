@@ -7,7 +7,7 @@
  * Author: D. Austin Belknap, UW-Madison
  */
 
-#include "../include/CaloLinks.h"
+#include "../interface/CaloLinks.h"
 
 
 /**

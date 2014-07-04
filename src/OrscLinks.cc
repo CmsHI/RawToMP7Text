@@ -7,7 +7,7 @@
  * Author: D. Austin Belknap, UW-Madison
  */
 
-#include "L1Trigger/oRSCPatterns/interface/OrscLinks.h"
+#include "../interface/OrscLinks.h"
 
 
 /**
