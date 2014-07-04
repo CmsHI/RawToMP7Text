@@ -4,21 +4,17 @@
 
 
 int main(){
-    // DefineLinks *linksdefEventpp_1=new DefineLinks();
-    // linksdefEventpp_1->ReadFileoRSC("InputsoRSC/outputoRSC_Eventpp_1.txt");
-    // linksdefEventpp_1->WriteFileMP7Format("OutputMP7/outputoRSC_Eventpp_1.txt");
+    DefineLinks *linksdefEventpp_1=new DefineLinks();
+    linksdefEventpp_1->ReadFileoRSC("InputsoRSC/output_753539223.txt");
+    linksdefEventpp_1->WriteFileMP7Format("OutputMP7/output_753539223.txt");
 
-    // DefineLinks *linksdefEventpp_2=new DefineLinks();
-    // linksdefEventpp_2->ReadFileoRSC("InputsoRSC/outputoRSC_Eventpp_2.txt");
-    // linksdefEventpp_2->WriteFileMP7Format("OutputMP7/outputoRSC_Eventpp_2.txt");
-
-    // DefineLinks *linksdefEventpp_3=new DefineLinks();
-    // linksdefEventpp_3->ReadFileoRSC("InputsoRSC/outputoRSC_Eventpp_3.txt");
-    // linksdefEventpp_3->WriteFileMP7Format("OutputMP7/outputoRSC_Eventpp_3.txt");
+    DefineLinks *linksdefEventpp_2=new DefineLinks();
+    linksdefEventpp_2->ReadFileoRSC("InputsoRSC/output_753585983.txt");
+    linksdefEventpp_2->WriteFileMP7Format("OutputMP7/output_753585983.txt");
 
     DefineLinks *linksdefEventpp_3=new DefineLinks();
-    linksdefEventpp_3->ReadFileoRSC("output.txt");
-    linksdefEventpp_3->WriteFileMP7Format("output_mp7.txt");
+    linksdefEventpp_3->ReadFileoRSC("InputsoRSC/output_753694855.txt");
+    linksdefEventpp_3->WriteFileMP7Format("OutputMP7/output_753694855.txt");
 
     return 0;
 }
