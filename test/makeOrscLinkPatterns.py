@@ -13,7 +13,7 @@ options = VarParsing('analysis')
 
 options.inputFiles = (
     'file:/afs/cern.ch/work/g/ginnocen/public/skim_10_1_wd2.root')
-options.maxEvents = 2
+options.maxEvents = 1
 options.parseArguments()
 
 process = cms.Process("ORSCPATTERNS")
