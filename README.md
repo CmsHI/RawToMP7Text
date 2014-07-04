@@ -2,9 +2,9 @@ RawToMP7Text
 ============
 
 This is a combination of three previous projects:
-https://github.com/uwcms/oRSCPatterns
-https://github.com/uwcms/CaloLinks/tree/newformat
-https://github.com/ginnocen/ConvertedoRSCtoMP7
+* https://github.com/uwcms/oRSCPatterns
+* https://github.com/uwcms/CaloLinks/tree/newformat
+* https://github.com/ginnocen/ConvertedoRSCtoMP7
 
 The purpose is to turn any event in a RAW file into a text format suitable for running on MP7 hardware. To use it, follow the directions at https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TOfflineDev to set up an emulator env. Then, follow these directions:
 
