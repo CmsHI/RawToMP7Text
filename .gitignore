@@ -1,0 +1,3 @@
+test/testGlobal
+*.pyc
+__init__.py
