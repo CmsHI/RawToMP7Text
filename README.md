@@ -12,11 +12,10 @@ The purpose is to turn any event in a RAW file into a text format suitable for r
 cd $CMSSW_BASE/src
 git clone git@github.com:CmsHI/RawToMP7Text.git L1Trigger/RawToMP7Text
 scram build -j4
-cd L1Trigger/RawToMP7Text
-make
 cd test
-cmsRun makeOrscLinkPatterns.py #makes a file named output.txt
-./testGlobal # turns output.txt into output_mp7.txt
+make
+cmsRun makeOrscLinkPatterns.py #outputs events to folder 'test/InputsoRSC'
+./testGlobal # reads 'test/InputoRSC' and outputs to 'test/OutputMP7'
 ```
 
-The file output_mp7.txt can then be given to a firmware developer.
+The files in  test/OutputMP7 can then be given to a firmware developer.
