@@ -235,25 +235,47 @@ CrateLinks::get_IEEt(unsigned int cand, unsigned int bit) {
 /**
  * Output the link values as 6 32-bit integers.
  */
+// std::vector<uint32_t>
+// CrateLinks::link_values(int link_number) {
+//   std::vector<uint32_t> link;
+
+//   uint32_t val = 0;
+
+//   for (int i = 0; i < 24; i++) {
+//     for (int j = 0; j < 8; j++) {
+//       val <<= 1;
+
+//       if (link_number == 1) {
+//         val |= *Link1[i][j] & 0x1;
+//       }
+//       else if (link_number == 2) {
+//         val |= *Link2[i][j] & 0x1;
+//       }
+//       else {
+//         throw std::invalid_argument("Invalid link number given");
+//       }
+//     }
+//     if (i % 4 == 3) {
+//       link.push_back(val);
+//       val = 0;
+//     }
+//   }
+//   return link;
+// }
+
 std::vector<uint32_t>
-CrateLinks::link_values(int link_number) {
+CrateLinks::link_values(int link_number){
   std::vector<uint32_t> link;
 
   uint32_t val = 0;
 
   for (int i = 0; i < 24; i++) {
     for (int j = 0; j < 8; j++) {
-      val <<= 1;
+      if(link_number == 1)
+	val |= (*Link1[i][j] & 0x1) << ((i%4)*8 + (7-j));
+      else
+	val |= (*Link2[i][j] & 0x1) << ((i%4)*8 + (7-j));
 
-      if (link_number == 1) {
-        val |= *Link1[i][j] & 0x1;
-      }
-      else if (link_number == 2) {
-        val |= *Link2[i][j] & 0x1;
-      }
-      else {
-        throw std::invalid_argument("Invalid link number given");
-      }
     }
     if (i % 4 == 3) {
       link.push_back(val);
@@ -391,10 +413,12 @@ CrateLinks::define_link_tables() {
 
 
   // copy values into the class member arrays
+  // this table needs to be completely reversed to actually match the official tables
+  // - 2014-07-09 Alex
   for (int i = 0; i < 24; i++) {
     for (int j = 0; j < 8; j++) {
-      Link1[i][j] = L1[i][j];
-      Link2[i][j] = L2[i][j];
+      Link1[23-i][j] = L1[i][j];
+      Link2[23-i][j] = L2[i][j];
     }
   }
 }

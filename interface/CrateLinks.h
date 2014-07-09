@@ -24,37 +24,37 @@
 class CrateLinks {
   private:
     // RC Et, Index: RC number, region, bit number
-    uint8_t RCEt[7][2][10];
+  uint8_t RCEt[7][2][10] ={{{0}}};
 
     // RC Tau Veto, Index: RC number, region
-    uint8_t RCTau[7][2];
+  uint8_t RCTau[7][2] ={{0}};
 
     // RC Overflow, Index: RC number, region
-    uint8_t RCOf[7][2];
+  uint8_t RCOf[7][2] ={{0}};
 
     // RC HAD Veto (MIP), Index: RC number, region
-    uint8_t RCHad[7][2];
+  uint8_t RCHad[7][2] ={{0}};
 
     // HF Finegrain, Index: Region
-    uint8_t HFFg[8];
+    uint8_t HFFg[8] ={0};
 
     // HF Et, Index: Region, bit number
-    uint8_t HFEt[8][8];
+    uint8_t HFEt[8][8] ={{0}};
 
 
     // Non-Iso EG position (0 Region, 1-3 card)
     // Index: candidate index, bit-number
-    uint8_t NEPos[4][4];
+    uint8_t NEPos[4][4] ={{0}};
 
     // Non-Iso EG Et, Index: cand. index, bit number
-    uint8_t NEEt[4][6];
+    uint8_t NEEt[4][6] ={{0}};
 
     // Iso EG position (0 Region, 1-3 card)
     // Index: candidate index, bit-number
-    uint8_t IEPos[4][4];
+    uint8_t IEPos[4][4] ={{0}};
 
     // Iso EG Et, Index: cand. index, bit number
-    uint8_t IEEt[4][6];
+    uint8_t IEEt[4][6] ={{0}};
 
     uint8_t ZERO;
 

@@ -90,13 +90,13 @@ OrscLinkPatterns::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
 
   // Load each region into the OrscLink object of its crate
   for (L1CaloRegionCollection::const_iterator newRegion = newRegions->begin();
-      newRegion != newRegions->end(); newRegion++) {
+       newRegion != newRegions->end(); newRegion++) {
     addRegion(calolinks.get_crate(newRegion->rctCrate()), *newRegion);
   }
 
   // Load each EM Candidate into the OrscLink object of its crate
   for (L1CaloEmCollection::const_iterator egtCand = newEMCands->begin();
-      egtCand != newEMCands->end(); egtCand++) {
+       egtCand != newEMCands->end(); egtCand++) {
     addEM(calolinks.get_crate(egtCand->rctCrate()), *egtCand);
   }
 
@@ -131,7 +131,6 @@ OrscLinkPatterns::addRegion(CrateLinks& crateLink, const L1CaloRegion &reg) {
   bool finegrain  = reg.fineGrain();
 
   bool isHF       = reg.isHf();
-
 
   if (isHF) {
     crateLink.set_HFFg(region, finegrain & 0x1);
