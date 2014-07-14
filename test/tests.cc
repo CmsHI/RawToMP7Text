@@ -15,6 +15,10 @@ int main(){
     DefineLinks *linksdefEventpp_3=new DefineLinks();
     linksdefEventpp_3->ReadFileoRSC("InputsoRSC/output_753694855.txt");
     linksdefEventpp_3->WriteFileMP7Format("OutputMP7/output_753694855.txt");
+    
+    DefineLinks *testreadMP7=new DefineLinks();
+    testreadMP7->ReadFileMP7("OutputMP7/output_753539223.txt");
+    testreadMP7->WriteFileMP7Format("test.txt");
 
     return 0;
 }
