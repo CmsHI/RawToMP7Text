@@ -27,6 +27,7 @@ class DefineLinks {
     DefineLinks();
     ~DefineLinks() { }
     void ReadFileoRSC(std::string);
+    void ReadFileMP7(std::string);
     void WriteFileMP7Format(std::string);
     int maplinkfromoRSCtoMP7(int);
     int maplinkfromMP7tooRSC(int);

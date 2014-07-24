@@ -10,6 +10,30 @@ DefineLinks::DefineLinks() {
   }
 }
 
+void DefineLinks::ReadFileMP7(std::string fileinput) {
+
+FILE *fp = fopen(fileinput.c_str(),"read");
+if(!fp) std::cout<<"FILE NOT FOUND"<<std::endl;
+
+int c=15;
+int index;
+char buffer [50];
+char line[1000];
+int counter=0;
+  while(fgets(line,100000,fp)){
+    if(line[0] != 'F') continue;
+    for (int i=0;i<36;i++){
+      index=c+i*11;
+      if(line[index-1] != 'v') std::cout<<"Error while reading the payload, check the input file!"<<std::endl;;
+      sprintf (buffer, "%c%c%c%c%c%c%c%c",line[index],line[index+1],line[index+2],line[index+3],line[index+4],line[index+5],line[index+6],line[index+7]);
+      nMP7int[counter][i]=(int)strtol(buffer, NULL, 16);
+    }
+    counter++;
+  }
+}
+
+
+
 void DefineLinks::ReadFileoRSC(std::string fileinput) {
 
   char nall[NLinks][10];
