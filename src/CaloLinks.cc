@@ -80,7 +80,7 @@ CaloLinks::write_to_file(std::ofstream& outfile) {
     }
     outfile << std::endl;
   }
-  outfile << std::dec << std::endl;
+  outfile << std::dec;// << std::endl;
 }
 
 

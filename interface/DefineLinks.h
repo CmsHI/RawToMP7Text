@@ -8,20 +8,20 @@
 #include <fstream>
 #include <stdexcept>
 #include <stdint.h>
-#include <iomanip>  
-#include <sstream>    
+#include <iomanip>
+#include <sstream>
 
 #define NLinks 36
-#define NwordsInLinkActive 6
+#define NwordsInLinkActive 600
 #define NwordsInLink 1024
 
 
 class DefineLinks {
   private:
-  
+
     int noRSCint[NwordsInLink][NLinks];
     int nMP7int[NwordsInLink][NLinks];
-    
+
 
   public:
     DefineLinks();

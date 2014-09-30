@@ -80,11 +80,11 @@ OrscLinkPatterns::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
   iEvent.getByToken(regionToken, newRegions);
   iEvent.getByToken(candsToken, newEMCands);
 
-  std::string outname = "";
-  outname += "InputsoRSC/output_";
-  outname += Form("%d",iEvent.id().event());
-  outname += ".txt";
-  outfile.open(outname.c_str(), std::ofstream::out);
+  // std::string outname = "";
+  // outname += "InputsoRSC/output_";
+  // outname += Form("%d",iEvent.id().event());
+  // outname += ".txt";
+  // outfile.open(outname.c_str(), std::ofstream::out);
 
   CaloLinks calolinks(iEvent.id().event(), iEvent.id().luminosityBlock(), iEvent.id().run());
 
@@ -103,19 +103,19 @@ OrscLinkPatterns::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
   // For each OrscLink crate object, print the optical link layouts into a text
   // file.
   calolinks.write_to_file(outfile);
-  outfile.close();
+  //outfile.close();
 }
 
 
 void
 OrscLinkPatterns::beginJob() {
-  //outfile.open("output.txt", std::ofstream::out);
+  outfile.open("InputsoRSC/output_100events.txt", std::ofstream::out);
 }
 
 
 void
 OrscLinkPatterns::endJob() {
-  //outfile.close();
+  outfile.close();
 }
 
 

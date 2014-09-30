@@ -13,13 +13,14 @@ options = VarParsing('analysis')
 
 options.inputFiles = (
     '/store/user/icali/HIMinBiasUPC/HIMinBiasUPC_Skim_HLT_HIMinBiasHfOrBSC_Centrality0-10//64ca16868e481177958780733023cfa2/SD_MB_Cen0_10_100_1_cwZ.root')
-options.maxEvents = 3
+options.maxEvents = 100
 options.parseArguments()
 
 process = cms.Process("ORSCPATTERNS")
 
 process.load('Configuration/StandardSequences/FrontierConditions_GlobalTag_cff')
-process.GlobalTag.globaltag = 'POSTLS161_V12::All'
+#process.GlobalTag.globaltag = 'POSTLS161_V12::All'
+process.GlobalTag.globaltag = 'GR_P_V27A::All'
 
 process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(options.maxEvents)
