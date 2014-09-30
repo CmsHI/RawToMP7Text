@@ -12,15 +12,17 @@ from FWCore.ParameterSet.VarParsing import VarParsing
 options = VarParsing('analysis')
 
 options.inputFiles = (
-    '/store/user/icali/HIMinBiasUPC/HIMinBiasUPC_Skim_HLT_HIMinBiasHfOrBSC_Centrality0-10//64ca16868e481177958780733023cfa2/SD_MB_Cen0_10_100_1_cwZ.root')
+    #'/store/user/icali/HIMinBiasUPC/HIMinBiasUPC_Skim_HLT_HIMinBiasHfOrBSC_Centrality0-10//64ca16868e481177958780733023cfa2/SD_MB_Cen0_10_100_1_cwZ.root'
+    'file:/export/d00/scratch/luck/L1EmulatorTestInput.root'
+)
 options.maxEvents = 100
 options.parseArguments()
 
 process = cms.Process("ORSCPATTERNS")
 
 process.load('Configuration/StandardSequences/FrontierConditions_GlobalTag_cff')
-#process.GlobalTag.globaltag = 'POSTLS161_V12::All'
-process.GlobalTag.globaltag = 'GR_P_V27A::All'
+process.GlobalTag.globaltag = 'POSTLS161_V12::All'
+#process.GlobalTag.globaltag = 'GR_P_V27A::All'
 
 process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(options.maxEvents)
@@ -32,14 +34,14 @@ process.source = cms.Source(
     )
 
 process.load("Configuration.Geometry.GeometryIdeal_cff")
-process.load("L1Trigger.L1TCalorimeter.L1TCaloStage1_HIFromRaw_cff")
+process.load("L1Trigger.L1TCalorimeter.L1TCaloStage1_PPFromRaw_cff")
 
 process.patterns = cms.EDAnalyzer('OrscLinkPatterns',
                                   src = cms.InputTag("simRctDigis"))
 
 process.pattern_sequence = cms.Sequence(
-#    process.L1TRerunHCALTP_FromRAW
-    process.hcalDigis
+    process.L1TRerunHCALTP_FromRAW
+    #process.hcalDigis
     +process.ecalDigis
     +process.simRctDigis
     +process.patterns)
