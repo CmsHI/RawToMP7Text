@@ -8,7 +8,7 @@ This is a combination of three previous projects:
 
 The purpose is to turn any event in a RAW file into a text format suitable for running on MP7 hardware. To use it, follow the directions at https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TOfflineDev to set up an emulator env. Then, follow these directions:
 
-```sh
+```Shell
 cd $CMSSW_BASE/src
 git clone git@github.com:CmsHI/RawToMP7Text.git L1Trigger/RawToMP7Text
 scram build -j4
