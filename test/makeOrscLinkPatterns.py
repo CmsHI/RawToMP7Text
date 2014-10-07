@@ -15,7 +15,7 @@ options.inputFiles = (
     #'/store/user/icali/HIMinBiasUPC/HIMinBiasUPC_Skim_HLT_HIMinBiasHfOrBSC_Centrality0-10//64ca16868e481177958780733023cfa2/SD_MB_Cen0_10_100_1_cwZ.root'
     'file:/export/d00/scratch/luck/L1EmulatorTestInput.root'
 )
-options.maxEvents = 100
+options.maxEvents = 1
 options.parseArguments()
 
 process = cms.Process("ORSCPATTERNS")
