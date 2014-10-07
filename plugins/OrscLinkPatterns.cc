@@ -139,9 +139,7 @@ OrscLinkPatterns::addRegion(CrateLinks& crateLink, const L1CaloRegion &reg) {
   if (isHF) {
     // std::cout << " regionIndex: " << region
     // 	      << " rctPhi: " << rctPhi
-    // 	      << " rctEta: " << rctEta
-    // 	      << " gctPhi: " << gctPhi
-    // 	      << " gctEta: " << gctEta << std::endl;
+    // 	      << " rctEta7: " << rctEta-7 << std::endl;
     crateLink.set_HFFg(rctPhi, rctEta-7, finegrain & 0x1);
 
     for (int i = 0; i < 8; ++i) {
