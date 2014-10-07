@@ -95,44 +95,44 @@ CrateLinks::get_RCHad(unsigned int card, unsigned int region) {
 
 
 void
-CrateLinks::set_HFFg(unsigned int region, uint8_t value) {
-  if (region > 7) {
+CrateLinks::set_HFFg(unsigned int rctPhi, unsigned int rctEta7, uint8_t value) {
+  if (rctPhi > 1 || rctEta7 > 3) {
     throw std::invalid_argument("Invalid HF region number");
   }
-  HFFg[region] = value & 0x1;
+  HFFg[rctPhi][rctEta7] = value & 0x1;
 }
 
 
 uint8_t
-CrateLinks::get_HFFg(unsigned int region) {
-  if (region > 7) {
+CrateLinks::get_HFFg(unsigned int rctPhi, unsigned int rctEta7) {
+  if (rctPhi > 1 || rctEta7 > 3) {
     throw std::invalid_argument("Invalid HF region number");
   }
-  return HFFg[region];
+  return HFFg[rctPhi][rctEta7];
 }
 
 
 void
-CrateLinks::set_HFEt(unsigned int region, unsigned int bit, uint8_t value) {
-  if (region > 7) {
+CrateLinks::set_HFEt(unsigned int rctPhi, unsigned int rctEta7, unsigned int bit, uint8_t value) {
+  if (rctPhi > 1 || rctEta7 > 3) {
     throw std::invalid_argument("Invalid HF region number");
   }
   if (bit > 7) {
     throw std::invalid_argument("Invalid HF Et bit number");
   }
-  HFEt[region][bit] = value & 0x1;
+  HFEt[rctPhi][rctEta7][bit] = value & 0x1;
 }
 
 
 uint8_t
-CrateLinks::get_HFEt(unsigned int region, unsigned int bit) {
-  if (region > 7) {
+CrateLinks::get_HFEt(unsigned int rctPhi, unsigned int rctEta7, unsigned int bit) {
+  if (rctPhi > 1 || rctEta7 > 3) {
     throw std::invalid_argument("Invalid HF region number");
   }
   if (bit > 7) {
     throw std::invalid_argument("Invalid HF Et bit number");
   }
-  return HFEt[region][bit];
+  return HFEt[rctPhi][rctEta7][bit];
 }
 
 
@@ -399,15 +399,15 @@ CrateLinks::define_link_tables() {
     {&IEEt[2][3],       &IEEt[2][2],        &IEEt[2][1],        &IEEt[2][0],        &IEPos[1][3],       &IEPos[1][2],       &IEPos[1][1],       &IEPos[1][0]},
     {&IEEt[1][5],       &IEEt[1][4],        &IEEt[1][3],        &IEEt[1][2],        &IEEt[1][1],        &IEEt[1][0],        &IEPos[0][3],       &IEPos[0][2]},
     {&IEPos[0][1],      &IEPos[0][0],       &IEEt[0][5],        &IEEt[0][4],        &IEEt[0][3],        &IEEt[0][2],        &IEEt[0][1],        &IEEt[0][0]},
-    {&HFFg[7],          &HFFg[6],           &HFFg[5],           &HFFg[4],           &HFFg[3],           &HFFg[2],           &HFFg[1],           &HFFg[0]},
-    {&HFEt[7][7],       &HFEt[7][6],        &HFEt[7][5],        &HFEt[7][4],        &HFEt[7][3],        &HFEt[7][2],        &HFEt[7][1],        &HFEt[7][0]},
-    {&HFEt[6][7],       &HFEt[6][6],        &HFEt[6][5],        &HFEt[6][4],        &HFEt[6][3],        &HFEt[6][2],        &HFEt[6][1],        &HFEt[6][0]},
-    {&HFEt[5][7],       &HFEt[5][6],        &HFEt[5][5],        &HFEt[5][4],        &HFEt[5][3],        &HFEt[5][2],        &HFEt[5][1],        &HFEt[5][0]},
-    {&HFEt[4][7],       &HFEt[4][6],        &HFEt[4][5],        &HFEt[4][4],        &HFEt[4][3],        &HFEt[4][2],        &HFEt[4][1],        &HFEt[4][0]},
-    {&HFEt[3][7],       &HFEt[3][6],        &HFEt[3][5],        &HFEt[3][4],        &HFEt[3][3],        &HFEt[3][2],        &HFEt[3][1],        &HFEt[3][0]},
-    {&HFEt[2][7],       &HFEt[2][6],        &HFEt[2][5],        &HFEt[2][4],        &HFEt[2][3],        &HFEt[2][2],        &HFEt[2][1],        &HFEt[2][0]},
-    {&HFEt[1][7],       &HFEt[1][6],        &HFEt[1][5],        &HFEt[1][4],        &HFEt[1][3],        &HFEt[1][2],        &HFEt[1][1],        &HFEt[1][0]},
-    {&HFEt[0][7],       &HFEt[0][6],        &HFEt[0][5],        &HFEt[0][4],        &HFEt[0][3],        &HFEt[0][2],        &HFEt[0][1],        &HFEt[0][0]},
+    {&HFFg[1][3],       &HFFg[1][2],        &HFFg[0][3],        &HFFg[0][2],        &HFFg[1][1],        &HFFg[1][0],        &HFFg[0][1],        &HFFg[0][0]},
+    {&HFEt[1][3][7],    &HFEt[1][3][6],     &HFEt[1][3][5],     &HFEt[1][3][4],     &HFEt[1][3][3],     &HFEt[1][3][2],     &HFEt[1][3][1],     &HFEt[1][3][0]},
+    {&HFEt[1][2][7],    &HFEt[1][2][6],     &HFEt[1][2][5],     &HFEt[1][2][4],     &HFEt[1][2][3],     &HFEt[1][2][2],     &HFEt[1][2][1],     &HFEt[1][2][0]},
+    {&HFEt[0][3][7],    &HFEt[0][3][6],     &HFEt[0][3][5],     &HFEt[0][3][4],     &HFEt[0][3][3],     &HFEt[0][3][2],     &HFEt[0][3][1],     &HFEt[0][3][0]},
+    {&HFEt[0][2][7],    &HFEt[0][2][6],     &HFEt[0][2][5],     &HFEt[0][2][4],     &HFEt[0][2][3],     &HFEt[0][2][2],     &HFEt[0][2][1],     &HFEt[0][2][0]},
+    {&HFEt[1][1][7],    &HFEt[1][1][6],     &HFEt[1][1][5],     &HFEt[1][1][4],     &HFEt[1][1][3],     &HFEt[1][1][2],     &HFEt[1][1][1],     &HFEt[1][1][0]},
+    {&HFEt[1][0][7],    &HFEt[1][0][6],     &HFEt[1][0][5],     &HFEt[1][0][4],     &HFEt[1][0][3],     &HFEt[1][0][2],     &HFEt[1][0][1],     &HFEt[1][0][0]},
+    {&HFEt[0][1][7],    &HFEt[0][1][6],     &HFEt[0][1][5],     &HFEt[0][1][4],     &HFEt[0][1][3],     &HFEt[0][1][2],     &HFEt[0][1][1],     &HFEt[0][1][0]},
+    {&HFEt[0][0][7],    &HFEt[0][0][6],     &HFEt[0][0][5],     &HFEt[0][0][4],     &HFEt[0][0][3],     &HFEt[0][0][2],     &HFEt[0][0][1],     &HFEt[0][0][0]},
     {&ZERO,             &ZERO,              &ZERO,              &ZERO,              &ZERO,              &ZERO,              &ZERO,              &ZERO}
   };
 

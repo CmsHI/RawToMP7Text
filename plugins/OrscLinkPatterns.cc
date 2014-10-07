@@ -126,6 +126,8 @@ OrscLinkPatterns::addRegion(CrateLinks& crateLink, const L1CaloRegion &reg) {
   unsigned et     = reg.et();
   unsigned rctPhi = reg.rctPhi();
   unsigned rctEta = reg.rctEta();
+  //unsigned gctPhi = reg.gctPhi();
+  //unsigned gctEta = reg.gctEta();
 
   bool tau        = reg.tauVeto();
   bool mip        = reg.mip();
@@ -135,14 +137,15 @@ OrscLinkPatterns::addRegion(CrateLinks& crateLink, const L1CaloRegion &reg) {
   bool isHF       = reg.isHf();
 
   if (isHF) {
-    std::cout << "Card: " << card
-	      << " regionIndex: " << region
-	      << " rctPhi: " << rctPhi
-	      << " rctEta: " << rctEta << std::endl;
-    crateLink.set_HFFg(region, finegrain & 0x1);
+    // std::cout << " regionIndex: " << region
+    // 	      << " rctPhi: " << rctPhi
+    // 	      << " rctEta: " << rctEta
+    // 	      << " gctPhi: " << gctPhi
+    // 	      << " gctEta: " << gctEta << std::endl;
+    crateLink.set_HFFg(rctPhi, rctEta-7, finegrain & 0x1);
 
     for (int i = 0; i < 8; ++i) {
-      crateLink.set_HFEt(region, i, et & 0x1);
+      crateLink.set_HFEt(rctPhi, rctEta-7, i, et & 0x1);
       et >>= 1;
     }
   }

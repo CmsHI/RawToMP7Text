@@ -35,11 +35,11 @@ class CrateLinks {
     // RC HAD Veto (MIP), Index: RC number, region
   uint8_t RCHad[7][2] ={{0}};
 
-    // HF Finegrain, Index: Region
-    uint8_t HFFg[8] ={0};
+    // HF Finegrain, Index: rctPhi, rctEta-7
+  uint8_t HFFg[2][4] ={{0}};
 
-    // HF Et, Index: Region, bit number
-    uint8_t HFEt[8][8] ={{0}};
+    // HF Et, Index: rctPhi, rctEta-7, bit number
+    uint8_t HFEt[2][4][8] ={{{0}}};
 
 
     // Non-Iso EG position (0 Region, 1-3 card)
@@ -77,8 +77,8 @@ class CrateLinks {
     void set_RCOf(unsigned int card, unsigned int region, uint8_t value);
     void set_RCHad(unsigned int card, unsigned int region, uint8_t value);
 
-    void set_HFFg(unsigned int region, uint8_t value);
-    void set_HFEt(unsigned int region, unsigned int bit, uint8_t value);
+    void set_HFFg(unsigned int rctPhi, unsigned int rctEta7, uint8_t value);
+    void set_HFEt(unsigned int rctPhi, unsigned int rctEta7, unsigned int bit, uint8_t value);
 
     void set_NEPos(unsigned int cand, unsigned int bit, uint8_t value);
     void set_NEEt(unsigned int cand, unsigned int bit, uint8_t value);
@@ -92,8 +92,8 @@ class CrateLinks {
     uint8_t get_RCOf(unsigned int card, unsigned int region);
     uint8_t get_RCHad(unsigned int card, unsigned int region);
 
-    uint8_t get_HFFg(unsigned int region);
-    uint8_t get_HFEt(unsigned int region, unsigned int bit);
+    uint8_t get_HFFg(unsigned int rctPhi, unsigned int rctEta7);
+    uint8_t get_HFEt(unsigned int rctPhi, unsigned int rctEta7, unsigned int bit);
 
     uint8_t get_NEPos(unsigned int cand, unsigned int bit);
     uint8_t get_NEEt(unsigned int cand, unsigned int bit);
