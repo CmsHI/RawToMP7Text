@@ -22,8 +22,8 @@ options.parseArguments()
 process = cms.Process("ORSCPATTERNS")
 
 process.load('Configuration/StandardSequences/FrontierConditions_GlobalTag_cff')
-process.GlobalTag.globaltag = 'POSTLS161_V12::All'
-#process.GlobalTag.globaltag = 'GR_P_V27A::All'
+#process.GlobalTag.globaltag = 'POSTLS161_V12::All'
+process.GlobalTag.globaltag = 'GR_P_V27A::All'
 
 process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(options.maxEvents)
