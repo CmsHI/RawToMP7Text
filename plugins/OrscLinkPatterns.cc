@@ -51,6 +51,7 @@ class OrscLinkPatterns : public edm::EDAnalyzer {
     edm::Handle<L1CaloEmCollection> newEMCands;
 
     std::ofstream outfile;
+    std::string outputName;
 
     void addRegion(CrateLinks& crateLink, const L1CaloRegion &reg);
     void addEM(CrateLinks& crateLink, const L1CaloEmCand &cand);
@@ -62,6 +63,7 @@ class OrscLinkPatterns : public edm::EDAnalyzer {
 OrscLinkPatterns::OrscLinkPatterns(const edm::ParameterSet& iConfig) {
   regionToken = consumes<L1CaloRegionCollection>(iConfig.getParameter<edm::InputTag>("src"));
   candsToken = consumes<L1CaloEmCollection>(iConfig.getParameter<edm::InputTag>("src"));
+  outputName = iConfig.getParameter<std::string>("outputFile");
 }
 
 
@@ -109,7 +111,7 @@ OrscLinkPatterns::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
 
 void
 OrscLinkPatterns::beginJob() {
-  outfile.open("InputsoRSC/output_100events.txt", std::ofstream::out);
+  outfile.open(outputName, std::ofstream::out);
 }
 
 
