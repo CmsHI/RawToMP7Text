@@ -16,7 +16,7 @@ options.inputFiles = (
     #'file:/export/d00/scratch/luck/L1EmulatorTestInput.root'
     'file:/afs/cern.ch/work/g/ginnocen/public/skim_10_1_wd2.root'
 )
-options.maxEvents = 100
+options.maxEvents = 109
 options.parseArguments()
 
 process = cms.Process("ORSCPATTERNS")
@@ -40,7 +40,7 @@ process.load("L1Trigger.L1TCalorimeter.L1TCaloStage1_PPFromRaw_cff")
 
 process.patterns = cms.EDAnalyzer('OrscLinkPatterns',
                                   src = cms.InputTag("simRctDigis"),
-                                  outputFile = cms.string("InputsoRSC/output_100events_wDelay.txt"))
+                                  outputFile = cms.string("InputsoRSC/output_100events_WithDelay.txt"))
 
 process.pattern_sequence = cms.Sequence(
     process.L1TRerunHCALTP_FromRAW
