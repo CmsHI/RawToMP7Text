@@ -124,3 +124,47 @@ int PhysicsToBitConverter::BuildPhysicsValue(int firstbit,int bitlength,int link
   }
   return myvalue;
 }
+
+void PhysicsToBitConverter::FillCrate(uint32_t data[12])
+{
+  for(int i = 0; i < 12; i+=2)
+  {
+    Set32bitWordLink0(0, data[i]);
+    Set32bitWordLink0(1, data[i]);
+  }
+
+  Convert();
+}
+
+void PhysicsToBitConverter::dumpPhysicsQuantitiesToText()
+{
+  const int nHFReg = 8;
+  const int nRegion = 2;
+  const int nCard = 7;
+  const int nEGIndex = 4;
+
+  std::cout << "Begin Crate Dump" << std::endl;
+  std::cout << "HBHE Regions" << std::endl;
+  for(int i = 0; i < nCard; ++i)
+  {
+    for(int j = 0; j < nRegion; ++j)
+    {
+      std::cout << "RCEt: " << GetRCEt(i,j) << " RCTau: " << GetRCTau(i, j) << " RCOf: " << GetRCOf(i, j) << " RCHad: " << GetRCHad(i,j) << std::endl;
+    }
+  }
+  std::cout << "HF Regions" << std::endl;
+  for(int i = 0; i < nHFReg; ++i)
+  {
+    std::cout << "HFEt: " << GetHFEt(i) << " HFFg: " << GetHFFg(i) << std::endl;
+  }
+  std::cout << "Iso EG Cands" << std::endl;
+  for(int i = 0; i < nEGIndex; ++i)
+  {
+    std::cout << "IEEt: " << GetIEEt(i) << " IEPos: " << GetIEPos(i) << std::endl;
+  }
+  std::cout << "Non-Iso EG Cands" << std::endl;
+  for(int i = 0; i < nEGIndex; ++i)
+  {
+    std::cout << "NEEt: " << GetNEEt(i) << " NEPos: " << GetNEPos(i) << std::endl;
+  }
+}
