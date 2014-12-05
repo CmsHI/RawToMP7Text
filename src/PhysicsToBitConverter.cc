@@ -167,4 +167,5 @@ void PhysicsToBitConverter::dumpPhysicsQuantitiesToText()
   {
     std::cout << "NEEt: " << GetNEEt(i) << " NEPos: " << GetNEPos(i) << std::endl;
   }
+  std::cout << "End Crate Dump" << std::endl;
 }
