@@ -127,10 +127,10 @@ int PhysicsToBitConverter::BuildPhysicsValue(int firstbit,int bitlength,int link
 
 void PhysicsToBitConverter::FillCrate(uint32_t data[12])
 {
-  for(int i = 0; i < 12; i+=2)
+  for(int i = 0; i < 6; i++)
   {
-    Set32bitWordLink0(0, data[i]);
-    Set32bitWordLink0(1, data[i]);
+    Set32bitWordLink0(i, data[i*2]);
+    Set32bitWordLink1(i, data[i*2+1]);
   }
 
   Convert();
