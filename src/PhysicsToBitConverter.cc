@@ -136,14 +136,12 @@ void PhysicsToBitConverter::FillCrate(uint32_t data[12])
   Convert();
 }
 
-void PhysicsToBitConverter::dumpPhysicsQuantitiesToText()
+void PhysicsToBitConverter::dumpRegionQuantitiesToText()
 {
   const int nHFReg = 8;
   const int nRegion = 2;
   const int nCard = 7;
-  const int nEGIndex = 4;
 
-  std::cout << "Begin Crate Dump" << std::endl;
   std::cout << "HBHE Regions" << std::endl;
   for(int i = 0; i < nCard; ++i)
   {
@@ -157,6 +155,11 @@ void PhysicsToBitConverter::dumpPhysicsQuantitiesToText()
   {
     std::cout << "HFEt: " << GetHFEt(i) << " HFFg: " << GetHFFg(i) << std::endl;
   }
+}
+
+void PhysicsToBitConverter::dumpEGQuantitiesToText()
+{
+  const int nEGIndex = 4;
   std::cout << "Iso EG Cands" << std::endl;
   for(int i = 0; i < nEGIndex; ++i)
   {
@@ -167,5 +170,4 @@ void PhysicsToBitConverter::dumpPhysicsQuantitiesToText()
   {
     std::cout << "NEEt: " << GetNEEt(i) << " NEPos: " << GetNEPos(i) << std::endl;
   }
-  std::cout << "End Crate Dump" << std::endl;
 }

@@ -34,7 +34,8 @@ class PhysicsToBitConverter {
     void Convert();
 
     void FillCrate(uint32_t data[12]);
-    void dumpPhysicsQuantitiesToText();
+    void dumpRegionQuantitiesToText();
+    void dumpEGQuantitiesToText();
 
     int GetRCEt(int card,int region);
     int GetHFEt(int region);
