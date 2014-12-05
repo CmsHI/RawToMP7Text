@@ -71,7 +71,7 @@ int PhysicsToBitConverter::GetNEPos(int cand){
 int PhysicsToBitConverter::GetNEEt(int cand){
 
   int mystart=databaseobject.GetIndicesNEEt(cand);
-  std::cout<<"GetIndicesNEEt"<<mystart<<std::endl;
+  //std::cout<<"GetIndicesNEEt"<<mystart<<std::endl;
   int mylength=databaseobject.GetNEEtLength();
   int mylink=databaseobject.GetNEEtLink();
 
