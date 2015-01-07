@@ -8,9 +8,23 @@
 
 namespace l1t{
   class rctDataBase {
+  public:
+    enum rctObjectType {
+      RCEt,
+      RCTau,
+      RCOf,
+      HFEt,
+      HFFg,
+      IEEt,
+      IEPos,
+      NEEt,
+      NEPos,
+      RCHad,
+      nObjects};
+
   private:
 
-    int RCEt_start [7][2];  //card, region
+    int RCEt_start[7][2];   //card, region
     int RCTau_start[7][2];  //card, region
     int RCOf_start[7][2];   //card, region
     int HFEt_start[8];      //region
@@ -21,66 +35,51 @@ namespace l1t{
     int NEPos_start[4];     //candidate
     int RCHad_start[7][2];  //card, region
 
-    int RCETlength;
-    int RCTaulength;
-    int RCOflength;
-    int HFEtlength;
-    int HFFglength;
-    int IEEtlength;
-    int IEPoslength;
-    int NEEtlength;
-    int NEPoslength;
-    int RCHadlength;
+    int length[nObjects];
 
-    int RCETlink;
-    int RCTaulink;
-    int RCOflink;
-    int HFEtlink;
-    int HFFglink;
-    int IEEtlink;
-    int IEPoslink;
-    int NEEtlink;
-    int NEPoslink;
-    int RCHadlink;
+    int link[nObjects];
 
   public:
     rctDataBase();
     ~rctDataBase(){};
 
+    int GetLength(rctObjectType t)
+    {
+      return length[t];
+    }
 
-    int GetRCEtLength(){return RCETlength;};
-    int GetRCTauLength(){return RCTaulength;};
-    int GetRCOfLength(){return RCOflength;};
-    int GetHFEtLength(){return HFEtlength;};
-    int GetHFFgLength(){return HFFglength;};
-    int GetIEEtLength(){return IEEtlength;};
-    int GetIEPosLength(){return IEPoslength;};
-    int GetNEEtLength(){return NEEtlength;};
-    int GetNEPosLength(){return NEPoslength;};
-    int GetRCHadLength(){return RCHadlength;};
+    int GetLink(rctObjectType t)
+    {
+      return link[t];
+    }
 
-    int GetRCEtLink(){return RCETlink;};
-    int GetRCTauLink(){return RCTaulink;};
-    int GetRCOfLink(){return RCOflink;};
-    int GetHFEtLink(){return HFEtlink;};
-    int GetHFFgLink(){return HFFglink;};
-    int GetIEEtLink(){return IEEtlink;};
-    int GetIEPosLink(){return IEPoslink;};
-    int GetNEEtLink(){return NEEtlink;};
-    int GetNEPosLink(){return NEPoslink;};
-    int GetRCHadLink(){return RCHadlink;};
-
-    int GetIndicesRCEt(int card, int region) { return RCEt_start[card][region];}
-    int GetIndicesRCTau(int card, int region){ return RCTau_start[card][region];}
-    int GetIndicesRCOf(int card, int region) { return RCOf_start[card][region];}
-    int GetIndicesHFEt(int region) { return HFEt_start[region];}
-    int GetIndicesHFFg(int cand) { return HFFg_start[cand];}
-    int GetIndicesIEEt(int cand) { return IEEt_start[cand];}
-    int GetIndicesIEPos(int cand){ return IEPos_start[cand];}
-    int GetIndicesNEEt(int cand) { return NEEt_start[cand];}
-    int GetIndicesNEPos(int cand){ return NEPos_start[cand];}
-    int GetIndicesRCHad(int card, int region){ return RCHad_start[card][region];}
-
+    int GetIndices(rctObjectType t, int c, int r = -1)
+    {
+      switch (t){
+      case RCEt:
+	return RCEt_start[c][r];
+      case RCTau:
+	return RCTau_start[c][r];
+      case RCOf:
+	return RCOf_start[c][r];
+      case HFEt:
+	return HFEt_start[c];
+      case HFFg:
+	return HFFg_start[c];
+      case IEEt:
+	return IEEt_start[c];
+      case IEPos:
+	return IEPos_start[c];
+      case NEEt:
+	return NEEt_start[c];
+      case NEPos:
+	return NEPos_start[c];
+      case RCHad:
+	return RCHad_start[c][r];
+      default:
+	return -1;
+      }
+    }
   };
 }
 #endif

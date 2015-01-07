@@ -3,27 +3,27 @@
 
 l1t::rctDataBase::rctDataBase() {
 
-  RCETlength=10;
-  RCTaulength=1;
-  RCOflength=1;
-  HFEtlength=8;
-  HFFglength=1;
-  IEEtlength=6;
-  IEPoslength=4;
-  NEEtlength=6;
-  NEPoslength=4;
-  RCHadlength=1;
+  length[RCEt]=10;
+  length[RCTau]=1;
+  length[RCOf]=1;
+  length[HFEt]=8;
+  length[HFFg]=1;
+  length[IEEt]=6;
+  length[IEPos]=4;
+  length[NEEt]=6;
+  length[NEPos]=4;
+  length[RCHad]=1;
 
-  RCETlink=0;
-  RCTaulink=0;
-  RCOflink=0;
-  HFEtlink=1;
-  HFFglink=1;
-  IEEtlink=1;
-  IEPoslink=1;
-  NEEtlink=1;
-  NEPoslink=1;
-  RCHadlink=1;
+  link[RCEt]=0;
+  link[RCTau]=0;
+  link[RCOf]=0;
+  link[HFEt]=1;
+  link[HFFg]=1;
+  link[IEEt]=1;
+  link[IEPos]=1;
+  link[NEEt]=1;
+  link[NEPos]=1;
+  link[RCHad]=1;
 
   RCEt_start[0][0]=8;
   RCEt_start[0][1]=18;
