@@ -1,7 +1,7 @@
-#include "../interface/DataBase.h"
+#include "../interface/rctDataBase.h"
 
 
-DataBase::DataBase() {
+l1t::rctDataBase::rctDataBase() {
 
   RCETlength=10;
   RCTaulength=1;
