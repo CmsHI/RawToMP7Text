@@ -13,6 +13,7 @@
 #include <vector>
 #include <array>
 #include <bitset>
+#include <stdint.h>
 #include "rctDataBase.h"
 
 namespace l1t{
@@ -29,9 +30,13 @@ namespace l1t{
 
     PhysicsToBitConverter();
     ~PhysicsToBitConverter() { }
-    void Set32bitWordLink0(int index,int value){words32bitLink[0][index]=value;};
-    void Set32bitWordLink1(int index,int value){words32bitLink[1][index]=value;};
+    void Set32bitWordLink0(int index,uint32_t value){words32bitLink[0][index]=value;};
+    void Set32bitWordLink1(int index,uint32_t value){words32bitLink[1][index]=value;};
     void Convert();
+
+    void FillCrate(uint32_t data[12]);
+    void dumpRegionQuantitiesToText();
+    void dumpEGQuantitiesToText();
 
     int GetRCEt(int card,int region);
     int GetHFEt(int region);

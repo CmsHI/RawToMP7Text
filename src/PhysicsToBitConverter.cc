@@ -72,7 +72,7 @@ namespace l1t{
   int PhysicsToBitConverter::GetNEEt(int cand){
 
     int mystart=databaseobject.GetIndicesNEEt(cand);
-    std::cout<<"GetIndicesNEEt"<<mystart<<std::endl;
+    //std::cout<<"GetIndicesNEEt"<<mystart<<std::endl;
     int mylength=databaseobject.GetNEEtLength();
     int mylink=databaseobject.GetNEEtLink();
 
@@ -124,5 +124,53 @@ namespace l1t{
       counter++;
     }
     return myvalue;
+  }
+
+
+  void PhysicsToBitConverter::FillCrate(uint32_t data[12])
+  {
+    for(int i = 0; i < 6; i++)
+    {
+      Set32bitWordLink0(i, data[i*2]);
+      Set32bitWordLink1(i, data[i*2+1]);
+    }
+
+    Convert();
+  }
+
+  void PhysicsToBitConverter::dumpRegionQuantitiesToText()
+  {
+    const int nHFReg = 8;
+    const int nRegion = 2;
+    const int nCard = 7;
+
+    std::cout << "HBHE Regions" << std::endl;
+    for(int i = 0; i < nCard; ++i)
+    {
+      for(int j = 0; j < nRegion; ++j)
+      {
+	std::cout << "RCEt: " << GetRCEt(i,j) << " RCTau: " << GetRCTau(i, j) << " RCOf: " << GetRCOf(i, j) << " RCHad: " << GetRCHad(i,j) << std::endl;
+      }
+    }
+    std::cout << "HF Regions" << std::endl;
+    for(int i = 0; i < nHFReg; ++i)
+    {
+      std::cout << "HFEt: " << GetHFEt(i) << " HFFg: " << GetHFFg(i) << std::endl;
+    }
+  }
+
+  void PhysicsToBitConverter::dumpEGQuantitiesToText()
+  {
+    const int nEGIndex = 4;
+    std::cout << "Iso EG Cands" << std::endl;
+    for(int i = 0; i < nEGIndex; ++i)
+    {
+      std::cout << "IEEt: " << GetIEEt(i) << " IEPos: " << GetIEPos(i) << std::endl;
+    }
+    std::cout << "Non-Iso EG Cands" << std::endl;
+    for(int i = 0; i < nEGIndex; ++i)
+    {
+      std::cout << "NEEt: " << GetNEEt(i) << " NEPos: " << GetNEPos(i) << std::endl;
+    }
   }
 }

@@ -46,7 +46,10 @@ class OrscLinkPatterns : public edm::EDAnalyzer {
     virtual void beginJob();
     virtual void analyze(const edm::Event&, const edm::EventSetup&);
     virtual void endJob();
-
+        
+    std::vector<L1CaloRegionCollection> vectorcaloregioncollection;
+    std::vector<L1CaloEmCollection> vectorEMcollection;
+    
     edm::Handle<L1CaloRegionCollection> newRegions;
     edm::Handle<L1CaloEmCollection> newEMCands;
 
@@ -58,12 +61,16 @@ class OrscLinkPatterns : public edm::EDAnalyzer {
 
     edm::EDGetToken regionToken;
     edm::EDGetToken candsToken;
+    
+    
+    int eventcounter;
 };
 
 OrscLinkPatterns::OrscLinkPatterns(const edm::ParameterSet& iConfig) {
   regionToken = consumes<L1CaloRegionCollection>(iConfig.getParameter<edm::InputTag>("src"));
   candsToken = consumes<L1CaloEmCollection>(iConfig.getParameter<edm::InputTag>("src"));
   outputName = iConfig.getParameter<std::string>("outputFile");
+  
 }
 
 
@@ -77,7 +84,7 @@ OrscLinkPatterns::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
   using std::endl;
 
   using namespace edm;
-
+  
   // Grab Region and EM collections
   iEvent.getByToken(regionToken, newRegions);
   iEvent.getByToken(candsToken, newEMCands);
@@ -87,36 +94,47 @@ OrscLinkPatterns::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
   // outname += Form("%d",iEvent.id().event());
   // outname += ".txt";
   // outfile.open(outname.c_str(), std::ofstream::out);
-
-  CaloLinks calolinks(iEvent.id().event(), iEvent.id().luminosityBlock(), iEvent.id().run());
-
+  
   // Load each region into the OrscLink object of its crate
-  for (L1CaloRegionCollection::const_iterator newRegion = newRegions->begin();
-       newRegion != newRegions->end(); newRegion++) {
-    addRegion(calolinks.get_crate(newRegion->rctCrate()), *newRegion);
-  }
-
-  // Load each EM Candidate into the OrscLink object of its crate
-  for (L1CaloEmCollection::const_iterator egtCand = newEMCands->begin();
-       egtCand != newEMCands->end(); egtCand++) {
-    addEM(calolinks.get_crate(egtCand->rctCrate()), *egtCand);
-  }
-
-  // For each OrscLink crate object, print the optical link layouts into a text
-  // file.
-  calolinks.write_to_file(outfile);
-  //outfile.close();
+   
+  vectorcaloregioncollection.push_back(*newRegions); 
+  vectorEMcollection.push_back(*newEMCands); 
+  eventcounter++;
 }
 
 
 void
 OrscLinkPatterns::beginJob() {
   outfile.open(outputName, std::ofstream::out);
+  eventcounter=0;
 }
 
 
 void
 OrscLinkPatterns::endJob() {
+  
+  if(eventcounter<9) std::cout<<"ERROR: number of events less than 9. It wont be possible to read 2x1 regions"<<std::endl; 
+  
+  CaloLinks calolinkMerged(0,0,0);
+  std::cout<<"numer of events"<<eventcounter<<std::endl;
+  
+  for(int indexevent=0;indexevent<eventcounter;indexevent++){
+    
+    if(indexevent<eventcounter-9){
+      for (L1CaloRegionCollection::const_iterator mynewRegion = vectorcaloregioncollection[indexevent].begin();
+        mynewRegion != vectorcaloregioncollection[indexevent].end(); mynewRegion++) {
+        addRegion(calolinkMerged.get_crate(mynewRegion->rctCrate()), *mynewRegion);
+      }
+    }
+
+    if(indexevent>=9){
+      for (L1CaloEmCollection::const_iterator myegtCand = vectorEMcollection[indexevent-9].begin();
+        myegtCand != vectorEMcollection[indexevent-9].end(); myegtCand++) {
+        addEM(calolinkMerged.get_crate(myegtCand->rctCrate()), *myegtCand);
+      }
+    }
+    calolinkMerged.write_to_file(outfile);
+  }
   outfile.close();
 }
 
@@ -134,7 +152,7 @@ OrscLinkPatterns::addRegion(CrateLinks& crateLink, const L1CaloRegion &reg) {
   bool tau        = reg.tauVeto();
   bool mip        = reg.mip();
   bool overflow   = reg.overFlow();
-  bool finegrain  = reg.fineGrain();
+  bool finegrain  = reg.fineGrain();  
 
   bool isHF       = reg.isHf();
 
