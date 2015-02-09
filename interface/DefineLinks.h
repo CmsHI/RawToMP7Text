@@ -12,7 +12,7 @@
 #include <sstream>
 
 #define NLinks 36
-#define NwordsInLinkActive 600
+#define NwordsInLinkActive 654
 #define NwordsInLink 1024
 
 
