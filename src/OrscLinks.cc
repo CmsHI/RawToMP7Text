@@ -88,7 +88,7 @@ OrscLinks::addEM(const L1CaloEmCand &cand) {
 
   // Separate and store the 6 rank bits, 3 card bits, region bit, for iso and
   // non-iso EM candidates.
-  if (iso) {
+  if (!iso) {
     for (int i = 0; i < 6; ++i) {
       NEEt[index][i] = rank & 0x1;
       rank >>= 1;
