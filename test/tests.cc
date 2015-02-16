@@ -16,6 +16,10 @@ int main(){
     // linksdefEventpp_3->ReadFileoRSC("InputsoRSC/output_5802847.txt");
     // linksdefEventpp_3->WriteFileMP7Format("OutputMP7/output_5802847.txt");
 
+    //DefineLinks *linksdef=new DefineLinks();
+    //linksdef->ReadFileoRSC("InputsoRSC/output_64eventsPion_WithDelay.txt");
+    //linksdef->WriteFileMP7Format("OutputMP7/output_64eventsPion_WithDelay.txt");
+    
     DefineLinks *linksdef=new DefineLinks();
     linksdef->ReadFileoRSC("InputsoRSC/output_100events_WithDelay.txt");
     linksdef->WriteFileMP7Format("OutputMP7/output_100events_WithDelay.txt");

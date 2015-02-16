@@ -14,6 +14,7 @@ options = VarParsing('analysis')
 options.inputFiles = (
     #'/store/user/icali/HIMinBiasUPC/HIMinBiasUPC_Skim_HLT_HIMinBiasHfOrBSC_Centrality0-10//64ca16868e481177958780733023cfa2/SD_MB_Cen0_10_100_1_cwZ.root'
     #'file:/export/d00/scratch/luck/L1EmulatorTestInput.root'
+    #'file:/afs/cern.ch/work/g/ginnocen/public/SinglePi0Pt40-0000.root'
     'file:/afs/cern.ch/work/g/ginnocen/public/skim_10_1_wd2.root'
 )
 options.maxEvents = 109
