@@ -118,21 +118,21 @@ OrscLinkPatterns::endJob() {
   CaloLinks calolinkMerged(0,0,0);
   std::cout<<"numer of events"<<eventcounter<<std::endl;
 
-  for(int indexevent=0;indexevent<eventcounter;indexevent++){
+  for(int indexevent=0;indexevent<eventcounter+9;indexevent++){
 
-    //if(indexevent<eventcounter-9){
+    if(indexevent<eventcounter){
       for (L1CaloRegionCollection::const_iterator mynewRegion = vectorcaloregioncollection[indexevent].begin();
-        mynewRegion != vectorcaloregioncollection[indexevent].end(); mynewRegion++) {
+	   mynewRegion != vectorcaloregioncollection[indexevent].end(); mynewRegion++) {
         addRegion(calolinkMerged.get_crate(mynewRegion->rctCrate()), *mynewRegion);
       }
-      //}
+    }
 
-      //if(indexevent>=9){
-      for (L1CaloEmCollection::const_iterator myegtCand = vectorEMcollection[indexevent].begin();
-        myegtCand != vectorEMcollection[indexevent].end(); myegtCand++) {
-        addEM(calolinkMerged.get_crate(myegtCand->rctCrate()), *myegtCand);
+    if(indexevent>=9){
+      for (L1CaloEmCollection::const_iterator myegtCand = vectorEMcollection[indexevent-9].begin();
+	   myegtCand != vectorEMcollection[indexevent-9].end(); myegtCand++) {
+	addEM(calolinkMerged.get_crate(myegtCand->rctCrate()), *myegtCand);
       }
-      //}
+    }
     calolinkMerged.write_to_file(outfile);
   }
   outfile.close();

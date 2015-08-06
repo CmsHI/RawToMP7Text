@@ -41,7 +41,7 @@ process.load("L1Trigger.L1TCalorimeter.L1TCaloStage1_PPFromRaw_cff")
 
 process.patterns = cms.EDAnalyzer('OrscLinkPatterns',
                                   src = cms.InputTag("simRctDigis"),
-                                  outputFile = cms.string("InputsoRSC/Run251718_NonIso.txt"))
+                                  outputFile = cms.string("InputsoRSC/Run251718_NonIso_withDelay.txt"))
 
 process.pattern_sequence = cms.Sequence(
     process.L1TRerunHCALTP_FromRAW
