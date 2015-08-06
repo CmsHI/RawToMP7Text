@@ -15,16 +15,16 @@ options.inputFiles = (
     #'/store/user/icali/HIMinBiasUPC/HIMinBiasUPC_Skim_HLT_HIMinBiasHfOrBSC_Centrality0-10//64ca16868e481177958780733023cfa2/SD_MB_Cen0_10_100_1_cwZ.root'
     #'file:/export/d00/scratch/luck/L1EmulatorTestInput.root'
     #'file:/afs/cern.ch/work/g/ginnocen/public/SinglePi0Pt40-0000.root'
-    'file:/afs/cern.ch/work/g/ginnocen/public/skim_10_1_wd2.root'
+    'file:/afs/cern.ch/work/r/richard/public/Run251718_NonIso.root'
 )
-options.maxEvents = 109
+options.maxEvents = 7
 options.parseArguments()
 
 process = cms.Process("ORSCPATTERNS")
 
-process.load('Configuration/StandardSequences/FrontierConditions_GlobalTag_cff')
-process.GlobalTag.globaltag = 'POSTLS161_V12::All'
-#process.GlobalTag.globaltag = 'GR_P_V27A::All'
+process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
+from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
+process.GlobalTag = GlobalTag(process.GlobalTag, 'GR_H_V58C', '')
 
 process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(options.maxEvents)
@@ -41,7 +41,7 @@ process.load("L1Trigger.L1TCalorimeter.L1TCaloStage1_PPFromRaw_cff")
 
 process.patterns = cms.EDAnalyzer('OrscLinkPatterns',
                                   src = cms.InputTag("simRctDigis"),
-                                  outputFile = cms.string("InputsoRSC/output_100events_WithDelay.txt"))
+                                  outputFile = cms.string("InputsoRSC/Run251718_NonIso.txt"))
 
 process.pattern_sequence = cms.Sequence(
     process.L1TRerunHCALTP_FromRAW
