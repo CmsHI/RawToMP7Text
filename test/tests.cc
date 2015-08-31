@@ -21,8 +21,8 @@ int main(){
     //linksdef->WriteFileMP7Format("OutputMP7/output_64eventsPion_WithDelay.txt");
 
     DefineLinks *linksdef=new DefineLinks();
-    linksdef->ReadFileoRSC("InputsoRSC/Run251718_NonIso_withDelay.txt");
-    linksdef->WriteFileMP7Format("OutputMP7/Run251718_NonIso_withDelay.txt");
+    linksdef->ReadFileoRSC("InputsoRSC/Run254790_isolTau_withDelay.txt");
+    linksdef->WriteFileMP7Format("OutputMP7/Run254790_isolTau_withDelay.txt");
 
 //    DefineLinks *testreadMP7=new DefineLinks();
 //    testreadMP7->ReadFileMP7("OutputMP7/output_753539223.txt");
