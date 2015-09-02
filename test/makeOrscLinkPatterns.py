@@ -15,9 +15,10 @@ options.inputFiles = (
     #'/store/user/icali/HIMinBiasUPC/HIMinBiasUPC_Skim_HLT_HIMinBiasHfOrBSC_Centrality0-10//64ca16868e481177958780733023cfa2/SD_MB_Cen0_10_100_1_cwZ.root'
     #'file:/export/d00/scratch/luck/L1EmulatorTestInput.root'
     #'file:/afs/cern.ch/work/g/ginnocen/public/SinglePi0Pt40-0000.root'
-    'root://cmsxrootd-site.fnal.gov//store/user/lpctrig/apana/Collisions2015/pickevents_254790_HLTPhyspart0_IsoTau/Run254790_isolTau_1_1_Cai.root'
+    #'root://cmsxrootd-site.fnal.gov//store/user/lpctrig/apana/Collisions2015/pickevents_254790_HLTPhyspart0_IsoTau/Run254790_isolTau_1_1_Cai.root'
+    'root://cmsxrootd-site.fnal.gov//store/user/lpctrig/apana/Collisions2015/pickevents_254790_HLTPhyspart0_RlxTau/Run254790_rlxTau_1_1_q8a.root'
 )
-options.maxEvents = 19
+options.maxEvents = 3
 options.parseArguments()
 
 process = cms.Process("ORSCPATTERNS")
@@ -41,7 +42,7 @@ process.load("L1Trigger.L1TCalorimeter.L1TCaloStage1_PPFromRaw_cff")
 
 process.patterns = cms.EDAnalyzer('OrscLinkPatterns',
                                   src = cms.InputTag("simRctDigis"),
-                                  outputFile = cms.string("InputsoRSC/Run254790_isolTau_withDelay.txt"))
+                                  outputFile = cms.string("InputsoRSC/Run254790_rlxTau_withDelay.txt"))
 
 process.pattern_sequence = cms.Sequence(
     process.L1TRerunHCALTP_FromRAW
