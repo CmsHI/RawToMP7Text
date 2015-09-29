@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../interface/DefineLinks.h"
 #include <math.h>
+#include "TString.h"
 
 
 int main(){
@@ -21,8 +22,18 @@ int main(){
     //linksdef->WriteFileMP7Format("OutputMP7/output_64eventsPion_WithDelay.txt");
 
     DefineLinks *linksdef=new DefineLinks();
-    linksdef->ReadFileoRSC("InputsoRSC/Run254790_rlxTau_withDelay.txt");
-    linksdef->WriteFileMP7Format("OutputMP7/Run254790_rlxTau_withDelay.txt");
+    for(int i = 1; i <= 10; i++)
+    {
+      std::string input = Form("InputsoRSC/HI_Central_Data_%.2d.txt",i);
+      std::string output = Form("OutputMP7/HI_Central_Data_%.2d.txt",i);
+      linksdef->ReadFileoRSC(input);
+      linksdef->WriteFileMP7Format(output);
+    }
+
+    // DefineLinks *linksdef2=new DefineLinks();
+    // linksdef2->ReadFileoRSC("InputsoRSC/pp100Events_HISettings.txt");
+    // linksdef2->WriteFileMP7Format("OutputMP7/pp100Events_HISettings.txt");
+
 
 //    DefineLinks *testreadMP7=new DefineLinks();
 //    testreadMP7->ReadFileMP7("OutputMP7/output_753539223.txt");
