@@ -54,8 +54,9 @@ options.inputFiles = (
 # '/store/user/icali/HIMinBiasUPC/HIMinBiasUPC_Skim_HLT_HIMinBiasHfOrBSC_Centrality0-10//64ca16868e481177958780733023cfa2/SD_MB_Cen0_10_124_1_p5Y.root',
 
     ## 10
-'/store/user/icali/HIMinBiasUPC/HIMinBiasUPC_Skim_HLT_HIMinBiasHfOrBSC_Centrality0-10//64ca16868e481177958780733023cfa2/SD_MB_Cen0_10_126_1_pCl.root',
-'/store/user/icali/HIMinBiasUPC/HIMinBiasUPC_Skim_HLT_HIMinBiasHfOrBSC_Centrality0-10//64ca16868e481177958780733023cfa2/SD_MB_Cen0_10_128_1_FuJ.root',
+#'/store/user/icali/HIMinBiasUPC/HIMinBiasUPC_Skim_HLT_HIMinBiasHfOrBSC_Centrality0-10//64ca16868e481177958780733023cfa2/SD_MB_Cen0_10_126_1_pCl.root',
+#'/store/user/icali/HIMinBiasUPC/HIMinBiasUPC_Skim_HLT_HIMinBiasHfOrBSC_Centrality0-10//64ca16868e481177958780733023cfa2/SD_MB_Cen0_10_128_1_FuJ.root',
+    "file:/afs/cern.ch/work/r/richard/public/HI_L1_FirmwareTesting/Mismatched_HI_Jets_RAW.root"
 
 )
 options.maxEvents = 100
@@ -65,7 +66,7 @@ process = cms.Process("ORSCPATTERNS")
 
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
 from Configuration.AlCa.GlobalTag_condDBv2 import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:run2_mc_HIon', '')
+process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:run2_data', '')
 
 process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(options.maxEvents)
@@ -77,21 +78,21 @@ process.source = cms.Source(
     )
 
 process.load("Configuration.Geometry.GeometryIdeal_cff")
-#process.load("L1Trigger.L1TCalorimeter.L1TCaloStage1_PPFromRaw_cff")
-process.load("L1Trigger.L1TCalorimeter.L1TCaloStage1_HIFromRaw_cff")
-# process.load('L1Trigger.L1TCalorimeter.caloStage1RCTLuts_cff')
-# process.caloStage1Params.jetSeedThreshold = cms.double(0.)
-# process.RCTConfigProducers.eicIsolationThreshold = cms.uint32(7)
-# process.RCTConfigProducers.hOeCut = cms.double(999)
-# process.RCTConfigProducers.eMinForHoECut = cms.double(999)
-# process.RCTConfigProducers.eMaxForHoECut = cms.double(999)
-# process.RCTConfigProducers.hMinForHoECut = cms.double(999)
-# process.RCTConfigProducers.eMinForFGCut = cms.double(999)
+process.load("L1Trigger.L1TCalorimeter.L1TCaloStage1_PPFromRaw_cff")
+#process.load("L1Trigger.L1TCalorimeter.L1TCaloStage1_HIFromRaw_cff")
+process.load('L1Trigger.L1TCalorimeter.caloStage1RCTLuts_cff')
+process.caloStage1Params.jetSeedThreshold = cms.double(0.)
+process.RCTConfigProducers.eicIsolationThreshold = cms.uint32(7)
+process.RCTConfigProducers.hOeCut = cms.double(999)
+process.RCTConfigProducers.eMinForHoECut = cms.double(999)
+process.RCTConfigProducers.eMaxForHoECut = cms.double(999)
+process.RCTConfigProducers.hMinForHoECut = cms.double(999)
+process.RCTConfigProducers.eMinForFGCut = cms.double(999)
 
 
 process.patterns = cms.EDAnalyzer('OrscLinkPatterns',
                                   src = cms.InputTag("simRctDigis"),
-                                  outputFile = cms.string("InputsoRSC/HI_Central_Data_10.txt"))
+                                  outputFile = cms.string("InputsoRSC/Mismatched_HI_Jets_rx.txt"))
 
 process.pattern_sequence = cms.Sequence(
     #process.L1TRerunHCALTP_FromRAW
