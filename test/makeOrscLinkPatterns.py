@@ -56,10 +56,14 @@ options.inputFiles = (
     ## 10
 #'/store/user/icali/HIMinBiasUPC/HIMinBiasUPC_Skim_HLT_HIMinBiasHfOrBSC_Centrality0-10//64ca16868e481177958780733023cfa2/SD_MB_Cen0_10_126_1_pCl.root',
 #'/store/user/icali/HIMinBiasUPC/HIMinBiasUPC_Skim_HLT_HIMinBiasHfOrBSC_Centrality0-10//64ca16868e481177958780733023cfa2/SD_MB_Cen0_10_128_1_FuJ.root',
-    "file:/afs/cern.ch/work/r/richard/public/HI_L1_FirmwareTesting/Mismatched_HI_Jets_RAW.root"
+    #"file:/afs/cern.ch/work/r/richard/public/HI_L1_FirmwareTesting/Mismatched_HI_Jets_RAW.root"
+    #"file:/afs/cern.ch/work/r/richard/public/HI_L1_FirmwareTesting/RUN_258694/l1tCalo_EDM_258694_0.root"
+    #"root://xrootd.cmsaf.mit.edu//store/user/mnguyen/Hydjet_Quenched_MinBias_5020GeV/HydjetMB_740pre8_MCHI2_74_V3_53XBS_DIGI-RAW/6da45e4e90741bc03dbd9aec5f36c050/step2_DIGI_L1_DIGI2RAW_HLT_RAW2DIGI_L1Reco_100_1_nRy.root"
+    #"file:/afs/cern.ch/work/r/richard/public/HI_L1_FirmwareTesting/RUN_259637/RUN_259637_centralityMismatches.root"
+    "file:/afs/cern.ch/work/r/richard/public/HI_L1_FirmwareTesting/RUN_259637/RUN_259637_egammaMismatches.root"
 
 )
-options.maxEvents = 100
+options.maxEvents = 119
 options.parseArguments()
 
 process = cms.Process("ORSCPATTERNS")
@@ -78,27 +82,33 @@ process.source = cms.Source(
     )
 
 process.load("Configuration.Geometry.GeometryIdeal_cff")
-process.load("L1Trigger.L1TCalorimeter.L1TCaloStage1_PPFromRaw_cff")
+#process.load("L1Trigger.L1TCalorimeter.L1TCaloStage1_PPFromRaw_cff")
 #process.load("L1Trigger.L1TCalorimeter.L1TCaloStage1_HIFromRaw_cff")
-process.load('L1Trigger.L1TCalorimeter.caloStage1RCTLuts_cff')
-process.caloStage1Params.jetSeedThreshold = cms.double(0.)
-process.RCTConfigProducers.eicIsolationThreshold = cms.uint32(7)
-process.RCTConfigProducers.hOeCut = cms.double(999)
-process.RCTConfigProducers.eMinForHoECut = cms.double(999)
-process.RCTConfigProducers.eMaxForHoECut = cms.double(999)
-process.RCTConfigProducers.hMinForHoECut = cms.double(999)
-process.RCTConfigProducers.eMinForFGCut = cms.double(999)
+#process.load('L1Trigger.L1TCalorimeter.caloStage1RCTLuts_cff')
+#process.caloStage1Params.jetSeedThreshold = cms.double(0.)
+#process.RCTConfigProducers.eicIsolationThreshold = cms.uint32(7)
+#process.RCTConfigProducers.hOeCut = cms.double(999)
+#process.RCTConfigProducers.eMinForHoECut = cms.double(999)
+#process.RCTConfigProducers.eMaxForHoECut = cms.double(999)
+#process.RCTConfigProducers.hMinForHoECut = cms.double(999)
+#process.RCTConfigProducers.eMinForFGCut = cms.double(999)
 
 
+#process.patterns = cms.EDAnalyzer('OrscLinkPatterns',
+#                                  src = cms.InputTag("simRctDigis"),
+#                                  outputFile = cms.string("InputsoRSC/MBHydjet502.txt"))
+
+process.load('EventFilter.L1TRawToDigi.caloStage1Digis_cfi')
 process.patterns = cms.EDAnalyzer('OrscLinkPatterns',
-                                  src = cms.InputTag("simRctDigis"),
-                                  outputFile = cms.string("InputsoRSC/Mismatched_HI_Jets_rx.txt"))
+                                  src = cms.InputTag("caloStage1Digis"),
+                                  outputFile = cms.string("InputsoRSC/RUN_259637_egammaMismatches.txt"))
 
 process.pattern_sequence = cms.Sequence(
     #process.L1TRerunHCALTP_FromRAW
-    process.hcalDigis
-    +process.ecalDigis
-    +process.simRctDigis
+    #process.hcalDigis
+    #+process.ecalDigis
+    #+process.simRctDigis
+    process.caloStage1Digis
     +process.patterns)
 
 process.p = cms.Path(process.pattern_sequence)

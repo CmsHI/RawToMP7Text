@@ -18,8 +18,8 @@ int main(){
     // linksdefEventpp_3->WriteFileMP7Format("OutputMP7/output_5802847.txt");
 
     DefineLinks *linksdef=new DefineLinks();
-    linksdef->ReadFileoRSC("InputsoRSC/Mismatched_HI_Jets_rx.txt");
-    linksdef->WriteFileMP7Format("OutputMP7/Mismatched_HI_Jets_rx.txt");
+    linksdef->ReadFileoRSC("InputsoRSC/RUN_259637_egammaMismatches.txt");
+    linksdef->WriteFileMP7Format("OutputMP7/RUN_259637_egammaMismatches.txt");
 
     // DefineLinks *linksdef=new DefineLinks();
     // for(int i = 1; i <= 10; i++)
