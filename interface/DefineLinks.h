@@ -14,14 +14,16 @@
 #define NLinks 36
 #define NwordsInLinkActive 654
 #define NwordsInLink 1024
+#define MAXARRAYSIZE 8400
 
 
 class DefineLinks {
   private:
 
-    int noRSCint[NwordsInLink][NLinks];
-    int nMP7int[NwordsInLink][NLinks];
+    int noRSCint[MAXARRAYSIZE][NLinks];
+    int nMP7int[MAXARRAYSIZE][NLinks];
 
+    int counter = 0;
 
   public:
     DefineLinks();
