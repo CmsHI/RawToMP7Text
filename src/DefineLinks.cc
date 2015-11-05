@@ -64,6 +64,7 @@ void DefineLinks::WriteFileMP7Format(std::string fileoutput){
 
   int nFiles = 0;
   int outCounter = 0;
+  bool active = true;
   while(outCounter < counter)
   {
     std::string tempFile = fileoutput + "_" + std::to_string(nFiles) + ".txt";
@@ -79,10 +80,9 @@ void DefineLinks::WriteFileMP7Format(std::string fileoutput){
       if(i>=100 && i<1000) outfile <<"Frame 0"<<i<<" : ";
       if(i>=1000 && i<9999) outfile <<"Frame "<<i<<" : ";
       for (int j = 0; j < NLinks; ++j) {
-	if(i<NwordsInLinkActive){
+	if(i<NwordsInLinkActive && active){
 	  outfile <<"1v"<< std::hex << std::setfill('0') << std::setw(8)<< int(nMP7int[outCounter][j]) << std::dec;
 	  outfile <<" ";
-	  outCounter++;
 	}
 	else{
 	  outfile <<"0v"<< std::hex << std::setfill('0') << std::setw(8)<< 0 << std::dec;
@@ -90,7 +90,9 @@ void DefineLinks::WriteFileMP7Format(std::string fileoutput){
 	}
       }
       outfile << std::endl;
-      if(outCounter >= counter) break;
+      if(i<NwordsInLinkActive)
+	outCounter++;
+      if(outCounter >= counter) active = false;
     }
     outfile.close();
     nFiles++;
